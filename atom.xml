@@ -4,7 +4,7 @@
   <title><![CDATA[Wrennywang’s Blog]]></title>
   <link href="http://wrennywang.github.io/atom.xml" rel="self"/>
   <link href="http://wrennywang.github.io/"/>
-  <updated>2015-01-21T21:26:08+08:00</updated>
+  <updated>2015-01-21T22:01:35+08:00</updated>
   <id>http://wrennywang.github.io/</id>
   <author>
     <name><![CDATA[王震]]></name>
@@ -12,6 +12,15 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[终于搞定了]]></title>
+    <link href="http://wrennywang.github.io/blog/2015/01/21/zhong-yu-gao-ding-liao/"/>
+    <updated>2015-01-21T22:00:09+08:00</updated>
+    <id>http://wrennywang.github.io/blog/2015/01/21/zhong-yu-gao-ding-liao</id>
+    <content type="html"><![CDATA[<p>ruby版本半天，bundle搞半天，终于搞定</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Hello]]></title>
