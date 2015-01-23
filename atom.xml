@@ -4,7 +4,7 @@
   <title><![CDATA[Wrennywang’s Blog]]></title>
   <link href="http://wrennywang.github.io/atom.xml" rel="self"/>
   <link href="http://wrennywang.github.io/"/>
-  <updated>2015-01-23T23:47:17+08:00</updated>
+  <updated>2015-01-24T00:32:15+08:00</updated>
   <id>http://wrennywang.github.io/</id>
   <author>
     <name><![CDATA[王震]]></name>
@@ -14,19 +14,28 @@
 
   
   <entry>
+    <title type="html"><![CDATA[CocoaPods:pod Install异常]]></title>
+    <link href="http://wrennywang.github.io/blog/2015/01/24/pod-installyi-chang/"/>
+    <updated>2015-01-24T00:19:46+08:00</updated>
+    <id>http://wrennywang.github.io/blog/2015/01/24/pod-installyi-chang</id>
+    <content type="html"><![CDATA[<p>pod install失败时，注意podfile中字符，键盘智能替换会将&lt;&lsquo;>替换为&lt;‘>；
+1.系统偏好设置>键盘>文本>使用智能引号和破折号－－－修改单引号设置
+2.文本编辑器>编辑>替换>智能引号——去掉勾选</p>
+]]></content>
+  </entry>
+  
+  <entry>
     <title type="html"><![CDATA[博文发布完整流程]]></title>
     <link href="http://wrennywang.github.io/blog/2015/01/23/bo-wen-fa-bu-wan-zheng-liu-cheng/"/>
     <updated>2015-01-23T23:13:33+08:00</updated>
     <id>http://wrennywang.github.io/blog/2015/01/23/bo-wen-fa-bu-wan-zheng-liu-cheng</id>
-    <content type="html"><![CDATA[<blockquote><p>rake new_post[&ldquo;New Post&rdquo;]</p>
-
-<h1>edit the file source/_posts/{DATETIME}-New-Post.markdown</h1>
-
-<p>rake generate
+    <content type="html"><![CDATA[<p>rake new_post[&ldquo;New Post&rdquo;]
+edit the file source/_posts/{DATETIME}-New-Post.markdown
+rake generate
 git add .
 git commit -am &ldquo;Some comment here.&rdquo;
 git push origin source
-rake deploy</p></blockquote>
+rake deploy</p>
 ]]></content>
   </entry>
   
