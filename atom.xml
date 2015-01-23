@@ -4,7 +4,7 @@
   <title><![CDATA[Wrennywang’s Blog]]></title>
   <link href="http://wrennywang.github.io/atom.xml" rel="self"/>
   <link href="http://wrennywang.github.io/"/>
-  <updated>2015-01-21T22:01:35+08:00</updated>
+  <updated>2015-01-23T23:18:42+08:00</updated>
   <id>http://wrennywang.github.io/</id>
   <author>
     <name><![CDATA[王震]]></name>
@@ -12,6 +12,23 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[博文发布完整流程]]></title>
+    <link href="http://wrennywang.github.io/blog/2015/01/23/bo-wen-fa-bu-wan-zheng-liu-cheng/"/>
+    <updated>2015-01-23T23:13:33+08:00</updated>
+    <id>http://wrennywang.github.io/blog/2015/01/23/bo-wen-fa-bu-wan-zheng-liu-cheng</id>
+    <content type="html"><![CDATA[<p>rake new_post[&ldquo;New Post&rdquo;]</p>
+
+<h1>edit the file source/_posts/{DATETIME}-New-Post.markdown</h1>
+
+<p>rake generate
+git add .
+git commit -am &ldquo;Some comment here.&rdquo;
+git push origin source
+rake deploy</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[终于搞定了]]></title>
