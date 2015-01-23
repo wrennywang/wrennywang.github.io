@@ -1,8 +1,0 @@
----
-layout: post
-title: "hello"
-date: 2015-01-21 21:15:48 +0800
-comments: true
-categories: 
----
-octopress安装完毕，测试下
