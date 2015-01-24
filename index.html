@@ -9,10 +9,8 @@
   <meta name="author" content="王震">
 
   
-  <meta name="description" content="pod install失败时，注意podfile中字符，键盘智能替换会将(&lsquo;)替换为(‘) 1
-2
-1. 系统偏好设置&gt;键盘&gt;文本&gt;使用智能引号和破折号－－－修改单引号设置
-2. 文本编辑器&gt;编辑&gt;替换&gt;智能引号——去掉勾选 ">
+  <meta name="description" content="Octopress bundle fail 1. gem install RedCloth -v ‘4.2.9’ fail 确认ruby版本问题，似乎需要使用dev版本，目前使用2.3.0dev 2. 安装redcloth后必须rbenv rehash，然后再bundle install
+">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -68,6 +66,86 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2015/01/24/octopress-bundle-fail/">Octopress Bundle Fail</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2015-01-24T21:36:37+08:00'><span class='date'><span class='date-month'>Jan</span> <span class='date-day'>24</span><span class='date-suffix'>th</span>, <span class='date-year'>2015</span></span> <span class='time'>9:36 pm</span></time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><h4>Octopress bundle fail</h4>
+
+<h5>1. gem install RedCloth -v ‘4.2.9’ fail</h5>
+
+<p>确认ruby版本问题，似乎需要使用dev版本，目前使用2.3.0dev</p>
+
+<h5>2. 安装redcloth后必须rbenv rehash，然后再bundle install</h5>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2015/01/24/rubyban-ben-wen-ti/">Ruby版本问题</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2015-01-24T21:32:31+08:00'><span class='date'><span class='date-month'>Jan</span> <span class='date-day'>24</span><span class='date-suffix'>th</span>, <span class='date-year'>2015</span></span> <span class='time'>9:32 pm</span></time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>ruby版本问题：</p>
+
+<pre><code>rbenv install xxx安装版本
+rbenv global(local) xxx 后
+ruby -v 依然显示system版本
+</code></pre>
+
+<p>先查看PATH</p>
+
+<pre><code>env | grep PATH
+</code></pre>
+
+<p>确认是否包含~/.rbenv</p>
+
+<pre><code>echo 'export PATH="$HOME/.rbenv/bin:$PATH"' &gt;&gt; ~/.bash_profile
+echo 'eval "$(rbenv init -)"' &gt;&gt; ~/.bash_profile
+</code></pre>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -158,6 +236,14 @@
     <section>
   <h1>Recent Posts</h1>
   <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/2015/01/24/octopress-bundle-fail/">Octopress Bundle Fail</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2015/01/24/rubyban-ben-wen-ti/">Ruby版本问题</a>
+      </li>
     
       <li class="post">
         <a href="/blog/2015/01/24/pod-installyi-chang/">CocoaPods:pod Install异常</a>

@@ -5,22 +5,12 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>博文发布完整流程 - Wrennywang’s Blog</title>
+  <title>Octopress Bundle Fail - Wrennywang’s Blog</title>
   <meta name="author" content="王震">
 
   
-  <meta name="description" content="1
-2
-3
-4
-5
-6
-7
-rake new_post["New Post"]
-#edit the file source/_posts/{DATETIME}-New-Post.markdown
-rake generate
-git add .
-git commit -am "Some &hellip;">
+  <meta name="description" content="Octopress bundle fail 1. gem install RedCloth -v ‘4.2.9’ fail 确认ruby版本问题，似乎需要使用dev版本，目前使用2.3.0dev 2. 安装redcloth后必须rbenv rehash，然后再bundle install
+">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -29,7 +19,7 @@ git commit -am "Some &hellip;">
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://wrennywang.github.io/blog/2015/01/23/bo-wen-fa-bu-wan-zheng-liu-cheng/">
+  <link rel="canonical" href="http://wrennywang.github.io/blog/2015/01/24/octopress-bundle-fail/">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <link href="/atom.xml" rel="alternate" title="Wrennywang’s Blog" type="application/atom+xml">
@@ -79,7 +69,7 @@ git commit -am "Some &hellip;">
   
   <header>
     
-      <h1 class="entry-title">博文发布完整流程</h1>
+      <h1 class="entry-title">Octopress Bundle Fail</h1>
     
     
       <p class="meta">
@@ -88,28 +78,20 @@ git commit -am "Some &hellip;">
 
 
 
-<time class='entry-date' datetime='2015-01-23T23:13:33+08:00'><span class='date'><span class='date-month'>Jan</span> <span class='date-day'>23</span><span class='date-suffix'>rd</span>, <span class='date-year'>2015</span></span> <span class='time'>11:13 pm</span></time>
+<time class='entry-date' datetime='2015-01-24T21:36:37+08:00'><span class='date'><span class='date-month'>Jan</span> <span class='date-day'>24</span><span class='date-suffix'>th</span>, <span class='date-year'>2015</span></span> <span class='time'>9:36 pm</span></time>
         
       </p>
     
   </header>
 
 
-<div class="entry-content"><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>rake new_post["New Post"]
-</span><span class='line'>#edit the file source/_posts/{DATETIME}-New-Post.markdown
-</span><span class='line'>rake generate
-</span><span class='line'>git add .
-</span><span class='line'>git commit -am "Some comment here." 
-</span><span class='line'>git push origin source
-</span><span class='line'>rake deploy</span></code></pre></td></tr></table></div></figure>
+<div class="entry-content"><h4>Octopress bundle fail</h4>
 
+<h5>1. gem install RedCloth -v ‘4.2.9’ fail</h5>
+
+<p>确认ruby版本问题，似乎需要使用dev版本，目前使用2.3.0dev</p>
+
+<h5>2. 安装redcloth后必须rbenv rehash，然后再bundle install</h5>
 </div>
 
 
@@ -125,7 +107,7 @@ git commit -am "Some &hellip;">
 
 
 
-<time class='entry-date' datetime='2015-01-23T23:13:33+08:00'><span class='date'><span class='date-month'>Jan</span> <span class='date-day'>23</span><span class='date-suffix'>rd</span>, <span class='date-year'>2015</span></span> <span class='time'>11:13 pm</span></time>
+<time class='entry-date' datetime='2015-01-24T21:36:37+08:00'><span class='date'><span class='date-month'>Jan</span> <span class='date-day'>24</span><span class='date-suffix'>th</span>, <span class='date-year'>2015</span></span> <span class='time'>9:36 pm</span></time>
       
 
 
@@ -140,8 +122,8 @@ git commit -am "Some &hellip;">
     
     <p class="meta">
       
+        <a class="basic-alignment left" href="/blog/2015/01/24/rubyban-ben-wen-ti/" title="Previous Post: ruby版本问题">&laquo; ruby版本问题</a>
       
-        <a class="basic-alignment right" href="/blog/2015/01/24/pod-installyi-chang/" title="Next Post: CocoaPods:pod install异常">CocoaPods:pod install异常 &raquo;</a>
       
     </p>
   </footer>
