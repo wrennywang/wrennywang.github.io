@@ -9,7 +9,26 @@
   <meta name="author" content="王震">
 
   
-  <meta name="description" content="NSNotification注意 addObserver时，@selector中方法的拼写： 字符匹配，大小写 -(void)viewDidAppear { [[NSNotificationCenter defaultCenter]addObserver:self selector:@ &hellip;">
+  <meta name="description" content="addObserver时，@selector中方法的拼写: 1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+// 1. 字符匹配，大小写
+-(void)viewDidAppear
+{ [[NSNotificationCenter defaultCenter] &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -87,38 +106,53 @@
   </header>
 
 
-  <div class="entry-content"><h1>NSNotification注意</h1>
+  <div class="entry-content"><ul>
+<li>addObserver时，@selector中方法的拼写:</li>
+</ul>
+
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+</pre></td><td class='code'><pre><code class='c'><span class='line'><span class="c1">// 1. 字符匹配，大小写</span>
+</span><span class='line'><span class="o">-</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="n">viewDidAppear</span>
+</span><span class='line'><span class="p">{</span>
+</span><span class='line'>    <span class="p">[[</span><span class="n">NSNotificationCenter</span> <span class="n">defaultCenter</span><span class="p">]</span><span class="nl">addObserver</span><span class="p">:</span><span class="n">self</span> <span class="nl">selector</span><span class="p">:</span><span class="err">@</span><span class="n">selector</span><span class="p">(</span><span class="nl">resignActive</span><span class="p">:)</span> <span class="nl">name</span><span class="p">:</span><span class="err">@</span><span class="s">&quot;RESIGNACTIVE&quot;</span> <span class="nl">object</span><span class="p">:</span><span class="n">nil</span><span class="p">];</span>
+</span><span class='line'><span class="p">}</span>
+</span><span class='line'><span class="o">-</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="nl">resignactive</span><span class="p">:(</span><span class="n">id</span><span class="p">)</span><span class="n">sender</span>
+</span><span class='line'><span class="p">{</span>
+</span><span class='line'><span class="p">}</span>
+</span><span class='line'>
+</span><span class='line'><span class="c1">// 2. 参数</span>
+</span><span class='line'><span class="o">-</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="n">viewDidAppear</span>
+</span><span class='line'><span class="p">{</span>
+</span><span class='line'>    <span class="p">[[</span><span class="n">NSNotificationCenter</span> <span class="n">defaultCenter</span><span class="p">]</span><span class="nl">addObserver</span><span class="p">:</span><span class="n">self</span> <span class="nl">selector</span><span class="p">:</span><span class="err">@</span><span class="n">selector</span><span class="p">(</span><span class="n">resignActive</span><span class="o">::</span><span class="p">)</span> <span class="nl">name</span><span class="p">:</span><span class="err">@</span><span class="s">&quot;RESIGNACTIVE&quot;</span> <span class="nl">object</span><span class="p">:</span><span class="n">nil</span><span class="p">];</span>
+</span><span class='line'><span class="p">}</span>
+</span><span class='line'><span class="o">-</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="nl">resignActive</span><span class="p">:(</span><span class="n">id</span><span class="p">)</span><span class="n">sender</span>
+</span><span class='line'><span class="p">{</span>
+</span><span class='line'><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
 
 <ul>
-<li><p>addObserver时，@selector中方法的拼写：</p>
+<li>addObserver与removeObserver<br/>
+一般情况下在在viewDidAppear中add observer,在viewDidDisappear时removeObserver;
 
-<ol>
-<li><p> 字符匹配，大小写
-      -(void)viewDidAppear
-      {
-          [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(resignActive:) name:@&ldquo;RESIGNACTIVE&rdquo; object:nil];
-      }</p>
-
-<pre><code>  -(void)resignactive:(id)sender
-  {
-  }
-</code></pre></li>
-<li><p> 参数
-      -(void)viewDidAppear
-      {
-          [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(resignActive::) name:@&ldquo;RESIGNACTIVE&rdquo; object:nil];
-      }</p>
-
-<pre><code>  -(void)resignActive:(id)sender
-  {
-  }
-</code></pre></li>
-</ol>
-</li>
-<li><p>addObserver与removeObserver</p>
-
-<p>  一般情况下在在viewDidAppear中add observer,在viewDidDisappear时removeObserver;
-      注意，通过手势操作viewController可以让disappear调用无数次，而didDisappear一次也不触发,从屏幕左边缘往右滑会有个pop的效果，但是不要滑到触发pop</p></li>
+<blockquote><p>注意，通过手势操作viewController可以让disappear调用无数次，而didDisappear一次也不触发,从屏幕左边缘往右滑会有个pop的效果，但是不要滑到触发pop</p></blockquote></li>
 </ul>
 
 </div>
