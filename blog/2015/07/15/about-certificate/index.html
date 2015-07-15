@@ -5,13 +5,11 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>Ruby版本问题 - Wrennywang’s Blog</title>
+  <title>About Certificate - Wrennywang’s Blog</title>
   <meta name="author" content="王震">
 
   
-  <meta name="description" content="ruby版本问题： rbenv install xxx安装版本
-rbenv global(local) xxx 后
-ruby -v 依然显示system版本 先查看PATH env | grep PATH 确认是否包含~/.rbenv echo 'export PATH="$HOME/.rbenv &hellip;">
+  <meta name="description" content="今天需要改个版本给深圳同事进行测试，exporting ipa时提示"Your account already has a valid iOS distribution certificate"; 看来需要重新整一遍证书，添加，已有两个Distribution证书， &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -20,7 +18,7 @@ ruby -v 依然显示system版本 先查看PATH env | grep PATH 确认是否包�
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://wrennywang.github.io/blog/2015/01/24/rubyban-ben-wen-ti/">
+  <link rel="canonical" href="http://wrennywang.github.io/blog/2015/07/15/about-certificate/">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <link href="/atom.xml" rel="alternate" title="Wrennywang’s Blog" type="application/atom+xml">
@@ -70,7 +68,7 @@ ruby -v 依然显示system版本 先查看PATH env | grep PATH 确认是否包�
   
   <header>
     
-      <h1 class="entry-title">Ruby版本问题</h1>
+      <h1 class="entry-title">About Certificate</h1>
     
     
       <p class="meta">
@@ -79,30 +77,17 @@ ruby -v 依然显示system版本 先查看PATH env | grep PATH 确认是否包�
 
 
 
-<time class='entry-date' datetime='2015-01-24T21:32:31+08:00'><span class='date'><span class='date-month'>Jan</span> <span class='date-day'>24</span><span class='date-suffix'>th</span>, <span class='date-year'>2015</span></span> <span class='time'>9:32 pm</span></time>
+<time class='entry-date' datetime='2015-07-15T13:12:16+08:00'><span class='date'><span class='date-month'>Jul</span> <span class='date-day'>15</span><span class='date-suffix'>th</span>, <span class='date-year'>2015</span></span> <span class='time'>1:12 pm</span></time>
         
       </p>
     
   </header>
 
 
-<div class="entry-content"><p>ruby版本问题：</p>
-
-<pre><code>rbenv install xxx安装版本
-rbenv global(local) xxx 后
-ruby -v 依然显示system版本
-</code></pre>
-
-<p>先查看PATH</p>
-
-<pre><code>env | grep PATH
-</code></pre>
-
-<p>确认是否包含~/.rbenv</p>
-
-<pre><code>echo 'export PATH="$HOME/.rbenv/bin:$PATH"' &gt;&gt; ~/.bash_profile
-echo 'eval "$(rbenv init -)"' &gt;&gt; ~/.bash_profile
-</code></pre>
+<div class="entry-content"><p>  今天需要改个版本给深圳同事进行测试，exporting ipa时提示&#8221;Your account already has a valid iOS distribution certificate&#8221;;<br/>
+  看来需要重新整一遍证书，添加，已有两个Distribution证书，上午没弄利索前Production中App Store and Ad Hoc还是可选，导入根证书后生成，最后一直loading；网上找了一些资料，才知道最多两个发布证书；<br/>
+  那就注销一个吧，点revoke后没反应&hellip;再找资料，有同学说跟苹果客服联系过，使用的chrome,需要换safari;换safari后，网页打开有点慢，但顺利注销，添加；<br/>
+  三月份的时候第一次发布的时候整过一次，当时就是因为用safari添加证书一直不成功菜换的chrome，现在反过来了，几个意思？难道因为OS X升级了？另外，现在再进行证书添加操作App Store and Ad Hoc选项变灰已不可选，上午难道是幻觉？</p>
 </div>
 
 
@@ -118,7 +103,7 @@ echo 'eval "$(rbenv init -)"' &gt;&gt; ~/.bash_profile
 
 
 
-<time class='entry-date' datetime='2015-01-24T21:32:31+08:00'><span class='date'><span class='date-month'>Jan</span> <span class='date-day'>24</span><span class='date-suffix'>th</span>, <span class='date-year'>2015</span></span> <span class='time'>9:32 pm</span></time>
+<time class='entry-date' datetime='2015-07-15T13:12:16+08:00'><span class='date'><span class='date-month'>Jul</span> <span class='date-day'>15</span><span class='date-suffix'>th</span>, <span class='date-year'>2015</span></span> <span class='time'>1:12 pm</span></time>
       
 
 
@@ -133,10 +118,8 @@ echo 'eval "$(rbenv init -)"' &gt;&gt; ~/.bash_profile
     
     <p class="meta">
       
-        <a class="basic-alignment left" href="/blog/2015/01/24/pod-installyi-chang/" title="Previous Post: CocoaPods:pod install异常">&laquo; CocoaPods:pod install异常</a>
+        <a class="basic-alignment left" href="/blog/2015/07/11/tu-pian-and-shi-pin-chuang-kou-shou-shi-suo-fang/" title="Previous Post: 图片&amp;视频窗口手势缩放">&laquo; 图片&amp;视频窗口手势缩放</a>
       
-      
-        <a class="basic-alignment right" href="/blog/2015/01/24/octopress-bundle-fail/" title="Next Post: Octopress bundle fail">Octopress bundle fail &raquo;</a>
       
     </p>
   </footer>
