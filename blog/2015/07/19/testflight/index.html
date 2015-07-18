@@ -5,13 +5,12 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>Ruby版本问题 - Wrennywang’s Blog</title>
+  <title>TestFlight - Wrennywang’s Blog</title>
   <meta name="author" content="王震">
 
   
-  <meta name="description" content="ruby版本问题： rbenv install xxx安装版本
-rbenv global(local) xxx 后
-ruby -v 依然显示system版本 先查看PATH env | grep PATH 确认是否包含~/.rbenv echo 'export PATH="$HOME/.rbenv &hellip;">
+  <meta name="description" content="友盟统计的错误率一度降低到0.5%左右，但问题是否修正在个人测试或者测试部的有限测试中无法确定；这种情况下，考虑启用TestFilght Beta测试。 参与测试者 在iOS设备上安装TestFlight,绑定Apple ID。
+在iOS设备上登录邮箱，接收邀请； &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -20,7 +19,7 @@ ruby -v 依然显示system版本 先查看PATH env | grep PATH 确认是否包�
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://wrennywang.github.io/blog/2015/01/24/rubyban-ben-wen-ti/">
+  <link rel="canonical" href="http://wrennywang.github.io/blog/2015/07/19/testflight/">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <link href="/atom.xml" rel="alternate" title="Wrennywang’s Blog" type="application/atom+xml">
@@ -70,7 +69,7 @@ ruby -v 依然显示system版本 先查看PATH env | grep PATH 确认是否包�
   
   <header>
     
-      <h1 class="entry-title">Ruby版本问题</h1>
+      <h1 class="entry-title">TestFlight</h1>
     
     
       <p class="meta">
@@ -79,30 +78,37 @@ ruby -v 依然显示system版本 先查看PATH env | grep PATH 确认是否包�
 
 
 
-<time class='entry-date' datetime='2015-01-24T21:32:31+08:00'><span class='date'><span class='date-month'>Jan</span> <span class='date-day'>24</span><span class='date-suffix'>th</span>, <span class='date-year'>2015</span></span> <span class='time'>9:32 pm</span></time>
+<time class='entry-date' datetime='2015-07-19T01:53:14+08:00'><span class='date'><span class='date-month'>Jul</span> <span class='date-day'>19</span><span class='date-suffix'>th</span>, <span class='date-year'>2015</span></span> <span class='time'>1:53 am</span></time>
         
       </p>
     
   </header>
 
 
-<div class="entry-content"><p>ruby版本问题：</p>
+<div class="entry-content"><p>友盟统计的错误率一度降低到0.5%左右，但问题是否修正在个人测试或者测试部的有限测试中无法确定；这种情况下，考虑启用TestFilght Beta测试。</p>
 
-<pre><code>rbenv install xxx安装版本
-rbenv global(local) xxx 后
-ruby -v 依然显示system版本
-</code></pre>
+<p><strong>参与测试者</strong></p>
 
-<p>先查看PATH</p>
+<ol>
+<li>在iOS设备上安装TestFlight,绑定Apple ID。</li>
+<li>在iOS设备上登录邮箱，接收邀请；点击相应链接即可跳转至TestFilght中打开测试App。
 
-<pre><code>env | grep PATH
-</code></pre>
+<blockquote><p>在安装时可能提示&#8221;TestFlight is currently unavailable,Try again later&#8221;。</p></blockquote></li>
+</ol>
 
-<p>确认是否包含~/.rbenv</p>
 
-<pre><code>echo 'export PATH="$HOME/.rbenv/bin:$PATH"' &gt;&gt; ~/.bash_profile
-echo 'eval "$(rbenv init -)"' &gt;&gt; ~/.bash_profile
-</code></pre>
+<p><strong>发布者</strong></p>
+
+<ol>
+<li>按平时提交App Store的步骤上传要发布的包即可。
+
+<blockquote><p>参与测试者出现&#8221;TestFlight is currently unavailable&#8221;提示时，重新下载distribution profile并重新打包。<br/>
+XC****** profile不可以，需要在Member Center添加Distribution Provisioning Profile。<br/>
+Build Phases> Code Signing> Provisioning Profile。</p></blockquote></li>
+<li>至少一个Tester，打开开关才有效。</li>
+<li>外部测试需要提交Beta App审核，时间一般是一天。</li>
+</ol>
+
 </div>
 
 
@@ -118,7 +124,7 @@ echo 'eval "$(rbenv init -)"' &gt;&gt; ~/.bash_profile
 
 
 
-<time class='entry-date' datetime='2015-01-24T21:32:31+08:00'><span class='date'><span class='date-month'>Jan</span> <span class='date-day'>24</span><span class='date-suffix'>th</span>, <span class='date-year'>2015</span></span> <span class='time'>9:32 pm</span></time>
+<time class='entry-date' datetime='2015-07-19T01:53:14+08:00'><span class='date'><span class='date-month'>Jul</span> <span class='date-day'>19</span><span class='date-suffix'>th</span>, <span class='date-year'>2015</span></span> <span class='time'>1:53 am</span></time>
       
 
 
@@ -133,10 +139,8 @@ echo 'eval "$(rbenv init -)"' &gt;&gt; ~/.bash_profile
     
     <p class="meta">
       
-        <a class="basic-alignment left" href="/blog/2015/01/24/pod-installyi-chang/" title="Previous Post: CocoaPods:pod install异常">&laquo; CocoaPods:pod install异常</a>
+        <a class="basic-alignment left" href="/blog/2015/07/17/custom-core-data-migrations/" title="Previous Post: Custom Core Data Migrations">&laquo; Custom Core Data Migrations</a>
       
-      
-        <a class="basic-alignment right" href="/blog/2015/01/24/octopress-bundle-fail/" title="Next Post: Octopress bundle fail">Octopress bundle fail &raquo;</a>
       
     </p>
   </footer>

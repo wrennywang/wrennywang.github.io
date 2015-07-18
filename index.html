@@ -9,7 +9,8 @@
   <meta name="author" content="王震">
 
   
-  <meta name="description" content="今天需要改个版本给深圳同事进行测试，exporting ipa时提示"Your account already has a valid iOS distribution certificate"; 看来需要重新整一遍证书，添加，已有两个Distribution证书， &hellip;">
+  <meta name="description" content="友盟统计的错误率一度降低到0.5%左右，但问题是否修正在个人测试或者测试部的有限测试中无法确定；这种情况下，考虑启用TestFilght Beta测试。 参与测试者 在iOS设备上安装TestFlight,绑定Apple ID。
+在iOS设备上登录邮箱，接收邀请； &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -65,6 +66,170 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2015/07/19/testflight/">TestFlight</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2015-07-19T01:53:14+08:00'><span class='date'><span class='date-month'>Jul</span> <span class='date-day'>19</span><span class='date-suffix'>th</span>, <span class='date-year'>2015</span></span> <span class='time'>1:53 am</span></time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>友盟统计的错误率一度降低到0.5%左右，但问题是否修正在个人测试或者测试部的有限测试中无法确定；这种情况下，考虑启用TestFilght Beta测试。</p>
+
+<p><strong>参与测试者</strong></p>
+
+<ol>
+<li>在iOS设备上安装TestFlight,绑定Apple ID。</li>
+<li>在iOS设备上登录邮箱，接收邀请；点击相应链接即可跳转至TestFilght中打开测试App。
+
+<blockquote><p>在安装时可能提示&#8221;TestFlight is currently unavailable,Try again later&#8221;。</p></blockquote></li>
+</ol>
+
+
+<p><strong>发布者</strong></p>
+
+<ol>
+<li>按平时提交App Store的步骤上传要发布的包即可。
+
+<blockquote><p>参与测试者出现&#8221;TestFlight is currently unavailable&#8221;提示时，重新下载distribution profile并重新打包。<br/>
+XC****** profile不可以，需要在Member Center添加Distribution Provisioning Profile。<br/>
+Build Phases> Code Signing> Provisioning Profile。</p></blockquote></li>
+<li>至少一个Tester，打开开关才有效。</li>
+<li>外部测试需要提交Beta App审核，时间一般是一天。</li>
+</ol>
+
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2015/07/17/custom-core-data-migrations/">Custom Core Data Migrations</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2015-07-17T17:58:42+08:00'><span class='date'><span class='date-month'>Jul</span> <span class='date-day'>17</span><span class='date-suffix'>th</span>, <span class='date-year'>2015</span></span> <span class='time'>5:58 pm</span></time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>目前App数据库版本已经有两个了，当前版本的数据库只是初始版本的简单扩展，增加了一个表(Entity);大版本升级需要修改一个表的定义，增加一个表，并添加表之间的关联(Relationship),还要考虑未来扩展的需要；</p>
+
+<p>先补充各种术语，从目前的代码中找到数据库处理相关的代码，了解使用到的类和方法；翻了几篇对Core Data的简述，知道需要做数据迁移，从初始版到当前版本使用的是轻量级迁移(Lightweight Migration)，通过设置一个字典实现:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+</pre></td><td class='code'><pre><code class='c'><span class='line'><span class="n">NSError</span> <span class="o">*</span><span class="n">error</span> <span class="o">=</span> <span class="n">nil</span><span class="p">;</span>
+</span><span class='line'><span class="n">NSURL</span> <span class="o">*</span><span class="n">storeURL</span> <span class="o">=</span> <span class="o">&lt;</span><span class="err">#</span><span class="n">The</span> <span class="n">URL</span> <span class="n">of</span> <span class="n">a</span> <span class="n">persistent</span> <span class="n">store</span><span class="err">#</span><span class="o">&gt;</span><span class="p">;</span>
+</span><span class='line'><span class="n">NSPersistentStoreCoordinator</span> <span class="o">*</span><span class="n">psc</span> <span class="o">=</span> <span class="o">&lt;</span><span class="err">#</span><span class="n">The</span> <span class="n">coordinator</span><span class="err">#</span><span class="o">&gt;</span><span class="p">;</span>
+</span><span class='line'><span class="n">NSDictionary</span> <span class="o">*</span><span class="n">options</span> <span class="o">=</span> <span class="p">[</span><span class="n">NSDictionary</span> <span class="nl">dictionaryWithObjectsAndKeys</span><span class="p">:</span>
+</span><span class='line'>    <span class="p">[</span><span class="n">NSNumber</span> <span class="nl">numberWithBool</span><span class="p">:</span><span class="n">YES</span><span class="p">],</span> <span class="n">NSMigratePersistentStoresAutomaticallyOption</span><span class="p">,</span>
+</span><span class='line'>    <span class="p">[</span><span class="n">NSNumber</span> <span class="nl">numberWithBool</span><span class="p">:</span><span class="n">YES</span><span class="p">],</span> <span class="n">NSInferMappingModelAutomaticallyOption</span><span class="p">,</span> <span class="n">nil</span><span class="p">];</span>
+</span><span class='line'>
+</span><span class='line'><span class="n">BOOL</span> <span class="n">success</span> <span class="o">=</span> <span class="p">[</span><span class="n">psc</span> <span class="nl">addPersistentStoreWithType</span><span class="p">:</span><span class="o">&lt;</span><span class="err">#</span><span class="n">Store</span> <span class="n">type</span><span class="err">#</span><span class="o">&gt;</span>
+</span><span class='line'>                    <span class="nl">configuration</span><span class="p">:</span><span class="o">&lt;</span><span class="err">#</span><span class="n">Configuration</span> <span class="n">or</span> <span class="n">nil</span><span class="err">#</span><span class="o">&gt;</span> <span class="nl">URL</span><span class="p">:</span><span class="n">storeURL</span>
+</span><span class='line'>                    <span class="nl">options</span><span class="p">:</span><span class="n">options</span> <span class="nl">error</span><span class="p">:</span><span class="o">&amp;</span><span class="n">error</span><span class="p">];</span>
+</span><span class='line'><span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="n">success</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>    <span class="c1">// Handle the error.</span>
+</span><span class='line'><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>
+考虑到未来扩展的需要，参考<a href="(http://www.objc.io/issues/4-core-data/core-data-migration/)">Custom Core Data Migrations</a>和<a href="(http://www.objccn.io/issue-4-7/)">自定义 Core Data 迁移</a>希望代码的实现可以方便日后扩展,v1 to v2, v2 to v3&hellip;结果运行不正常，在处理v2 to v3时死循环了，确认示例代码运行正常，开始排查：</p>
+
+<p>首先，排除参考代码实现上的遗漏，确认没有。<br/>
+第二步，将示例代码中的数据库移过来进行测试，运行正常&mdash;看来与数据库本身有关。<br/>
+第三步，已经确认问题原因在于从v2至v3迁移</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+</pre></td><td class='code'><pre><code class='c'><span class='line'><span class="c1">//See if we can find a matching destination model</span>
+</span><span class='line'><span class="n">NSManagedObjectModel</span> <span class="o">*</span><span class="n">model</span> <span class="o">=</span> <span class="n">nil</span><span class="p">;</span>
+</span><span class='line'><span class="n">NSMappingModel</span> <span class="o">*</span><span class="n">mapping</span> <span class="o">=</span> <span class="n">nil</span><span class="p">;</span>
+</span><span class='line'><span class="n">NSString</span> <span class="o">*</span><span class="n">modelPath</span> <span class="o">=</span> <span class="n">nil</span><span class="p">;</span>
+</span><span class='line'><span class="k">for</span> <span class="p">(</span><span class="n">modelPath</span> <span class="n">in</span> <span class="n">modelPaths</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>    <span class="n">model</span> <span class="o">=</span> <span class="p">[[</span><span class="n">NSManagedObjectModel</span> <span class="n">alloc</span><span class="p">]</span> <span class="nl">initWithContentsOfURL</span><span class="p">:[</span><span class="n">NSURL</span> <span class="nl">fileURLWithPath</span><span class="p">:</span><span class="n">modelPath</span><span class="p">]];</span>
+</span><span class='line'>    <span class="n">mapping</span> <span class="o">=</span> <span class="p">[</span><span class="n">NSMappingModel</span> <span class="nl">mappingModelFromBundles</span><span class="p">:</span><span class="err">@</span><span class="p">[[</span><span class="n">NSBundle</span> <span class="n">mainBundle</span><span class="p">]]</span>
+</span><span class='line'>                                           <span class="nl">forSourceModel</span><span class="p">:</span><span class="n">sourceModel</span>
+</span><span class='line'>                                         <span class="nl">destinationModel</span><span class="p">:</span><span class="n">model</span><span class="p">];</span>
+</span><span class='line'>    <span class="c1">//If we found a mapping model then proceed</span>
+</span><span class='line'>    <span class="k">if</span> <span class="p">(</span><span class="n">mapping</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>        <span class="k">break</span><span class="p">;</span>
+</span><span class='line'>    <span class="p">}</span>
+</span><span class='line'><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>
+先怀疑mapping model创建有问题，仅有v1,v2两个版本时，创建v1至v2 mapping model，可正确迁移；增加v3，创建v2至v3 mapping model，跟踪发现，迁移到v2后，总能获取到sourceModel至v2 model的mapping model;是否因为modelPaths中顺序问题导致？排查，否定；</p>
+
+<p>删除v1至v2 mapping model，确认仅留下v2-v3 mapping model，可正确完成迁移；综合对前面情况的分析，只留下v2-v3 mapping model可实现v1-v3迁移，测试确认,问题已经初步解决；这样的办法不能解决后续扩展问题，还得继续钻&hellip;</p>
+
+<p>从已得到的解决办法看，是否可以认为是因为v1-v2,v2-v3都可以由Core Data自己推导出mapping model导致呢？是否可以不手动创建mapping model，直接使用inferredMappingModelForSourceModel:destinationModel:error:获取mapping model呢？<br/>
+测试确认，可行，可实现v1/v2至v3迁移;差不多了吧？还不够,如果使用手动创建mapping model怎么办&hellip;</p>
+
+<p>既然问题是v2-v3迁移时反复获取至v2的mapping model，那么完成v1-v2迁移后将往v2迁移的mapping排除掉步就解决了吗？
+第一种尝试，modelPaths中去掉v2 path，不行;<br/>
+第二种尝试，比较entityVersionHashesByName,可行!</p>
+
+<p>至此，问题基本解决，希望对新手有帮助，如有问题或有更好的建议，请各位email:wrennywang@qq.com，万分感激!</p>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -531,6 +696,14 @@ echo 'eval "$(rbenv init -)"' &gt;&gt; ~/.bash_profile
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2015/07/19/testflight/">TestFlight</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2015/07/17/custom-core-data-migrations/">Custom Core Data Migrations</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2015/07/15/about-certificate/">About Certificate</a>
       </li>
     
@@ -540,14 +713,6 @@ echo 'eval "$(rbenv init -)"' &gt;&gt; ~/.bash_profile
     
       <li class="post">
         <a href="/blog/2015/07/10/nsnotificationxiang-guan/">NSNotification相关</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2015/01/24/octopress-bundle-fail/">Octopress Bundle Fail</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2015/01/24/rubyban-ben-wen-ti/">Ruby版本问题</a>
       </li>
     
   </ul>
